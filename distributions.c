@@ -10,12 +10,17 @@ float single_gaussian(float mu, float sig_squared);
 void seed();
 
 int main(int argc, char *argv[]) {
+	if (argc < 4) {
+		printf("Usage: %s int float float\n", argv[0]);
+		return EXIT_FAILURE;
+	}
+
 	seed();
 
 	FILE *fp = fopen("data.txt", "w");
-	int count = 1000000;
+	int count = atoi(argv[1]);
 
-	float* vars = generate_gaussian(count, 0, 10);
+	float* vars = generate_gaussian(count, atof(argv[2]), atof(argv[3]));
 
 	for (int i = 0; i < count; i++) {
 		fprintf(fp, "%f ", vars[i]);
@@ -27,6 +32,9 @@ int main(int argc, char *argv[]) {
 	return EXIT_SUCCESS;
 }
 
+/**
+ * Generates an array of random floats according to the Uniform distribution.
+*/
 float* generate_uniform(int count, float min, float max) {
 	float* u = malloc(sizeof(float) * count);
 	for (int i = 0; i < count; i++) {
@@ -35,6 +43,9 @@ float* generate_uniform(int count, float min, float max) {
 	return u;
 }
 
+/**
+ * Generates an array of random floats according to the Normal/Gaussian distribution.
+*/
 float* generate_gaussian(int count, float mu, float sig_squared) {
 	float* g = malloc(sizeof(float) * count);
 	int i;
@@ -53,15 +64,25 @@ float* generate_gaussian(int count, float mu, float sig_squared) {
 	return g;
 }
 
+/**
+ * Generates a single random float according to the Uniform distribution.
+*/
 float single_uniform(float min, float max) {
 	return drand48() * (max - min) + min;
 }
+
+/**
+ * Generates a single random float according to the Normal/Gaussian distribution.
+*/
 float single_gaussian(float mu, float sig_squared) {
 	float rayleigh = sqrt(-2 * log(drand48()));
 	float theta = single_uniform(0, 2 * M_PI);
 	return sig_squared * rayleigh * sin(theta) + mu;
 }
 
+/**
+ * Seeds the random number generator.
+*/
 void seed() {
 	time_t t;
 	srand48((unsigned)time(&t));
