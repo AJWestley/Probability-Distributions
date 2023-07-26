@@ -1,6 +1,6 @@
 CC ?= gcc
 CFLAGS ?= -g -fopenmp -Wall -Wextra -pedantic
-LDFLAGS ?= -lm
+LOADLIBES ?= -lm
 
 clean:
 	rm -f $(wildcard *.o)
