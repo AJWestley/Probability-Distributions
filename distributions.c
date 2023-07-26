@@ -3,11 +3,7 @@
 #include <math.h>
 #include <time.h>
 
-float* generate_uniform(int count, float min, float max);
-float* generate_gaussian(int count, float mu, float sig_squared);
-float single_uniform(float min, float max);
-float single_gaussian(float mu, float sig_squared);
-void seed();
+#include "distributions.h"
 
 int main(int argc, char *argv[]) {
 	if (argc < 4) {
