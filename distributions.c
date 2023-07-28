@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	FILE *fp = fopen("data.txt", "w");
 	int count = atoi(argv[1]);
 
-	float* vars = generate_gaussian(count, atof(argv[2]), atof(argv[3]));
+	float* vars = exponential_dist(count, atof(argv[2]));
 
 	for (int i = 0; i < count; i++) {
 		fprintf(fp, "%f ", vars[i]);
@@ -31,10 +31,10 @@ int main(int argc, char *argv[]) {
 /**
  * Generates an array of random floats according to the Uniform distribution.
 */
-float* generate_uniform(int count, float min, float max) {
+float* uniform_dist(int count, float min, float max) {
 	float* u = malloc(sizeof(float) * count);
 	for (int i = 0; i < count; i++) {
-		u[i] = single_uniform(min, max);
+		u[i] = uniform_single(min, max);
 	}
 	return u;
 }
@@ -42,18 +42,18 @@ float* generate_uniform(int count, float min, float max) {
 /**
  * Generates an array of random floats according to the Normal/Gaussian distribution.
 */
-float* generate_gaussian(int count, float mu, float sig_squared) {
+float* gaussian_dist(int count, float mu, float sig_squared) {
 	float* g = malloc(sizeof(float) * count);
 	int i;
 	float rayleigh, theta;
 	for (i = 0; i < count-1; i += 2) {
 		rayleigh = sqrt(-2 * log(drand48()));
-		theta = single_uniform(0, 2 * M_PI);
+		theta = uniform_single(0, 2 * M_PI);
 		g[i] = sig_squared * rayleigh * cos(theta) + mu;
 		g[i+1] = sig_squared * rayleigh * sin(theta) + mu;
 	}
 	rayleigh = sqrt(-2 * log(drand48()));
-	theta = single_uniform(0, 2 * M_PI);
+	theta = uniform_single(0, 2 * M_PI);
 	g[count-1]  = sig_squared * rayleigh * cos(theta) + mu;
 	if (i == count ) g[count-2] = sig_squared * rayleigh * sin(theta) + mu;
 		
@@ -61,19 +61,37 @@ float* generate_gaussian(int count, float mu, float sig_squared) {
 }
 
 /**
+ * Generates an array of random floats according to the Exponential distribution.
+*/
+float* exponential_dist(int count, float lambda) {
+	float* ex = malloc(sizeof(float) * count);
+	for (int i = 0; i < count; i++) {
+		ex[i] = exponential_single(lambda);
+	}
+	return ex;
+}
+
+/**
  * Generates a single random float according to the Uniform distribution.
 */
-float single_uniform(float min, float max) {
+float uniform_single(float min, float max) {
 	return drand48() * (max - min) + min;
 }
 
 /**
  * Generates a single random float according to the Normal/Gaussian distribution.
 */
-float single_gaussian(float mu, float sig_squared) {
+float gaussian_single(float mu, float sig_squared) {
 	float rayleigh = sqrt(-2 * log(drand48()));
-	float theta = single_uniform(0, 2 * M_PI);
+	float theta = uniform_single(0, 2 * M_PI);
 	return sig_squared * rayleigh * sin(theta) + mu;
+}
+
+/**
+ * Generates a single random float according to the Exponential distribution.
+*/
+float exponential_single(float lambda) {
+	return -(log(drand48()) / lambda);
 }
 
 /**

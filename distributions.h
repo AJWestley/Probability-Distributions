@@ -1,10 +1,12 @@
 #ifndef _DIST_H
 #define _DIST_H
 
-float* generate_uniform(int count, float min, float max);
-float* generate_gaussian(int count, float mu, float sig_squared);
-float single_uniform(float min, float max);
-float single_gaussian(float mu, float sig_squared);
+float* uniform_dist(int count, float min, float max);
+float* gaussian_dist(int count, float mu, float sig_squared);
+float* exponential_dist(int count, float lambda);
+float uniform_single(float min, float max);
+float gaussian_single(float mu, float sig_squared);
+float exponential_single(float lambda);
 void seed();
 
 #endif 
