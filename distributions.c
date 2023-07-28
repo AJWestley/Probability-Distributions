@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 	FILE *fp = fopen("data.txt", "w");
 	int count = atoi(argv[1]);
 
-	float* vars = exponential_dist(count, atof(argv[2]));
+	float* vars = bernoulli_dist(count, atof(argv[2]));
 
 	for (int i = 0; i < count; i++) {
 		fprintf(fp, "%f ", vars[i]);
@@ -72,6 +72,17 @@ float* exponential_dist(int count, float lambda) {
 }
 
 /**
+ * Generates an array of random floats according to the Bernoulli distribution.
+*/
+float* bernoulli_dist(int count, float p) {
+	float* bern = malloc(sizeof(float) * count);
+	for (int i = 0; i < count; i++) {
+		bern[i] = bernoulli_single(p);
+	}
+	return bern;
+}
+
+/**
  * Generates a single random float according to the Uniform distribution.
 */
 float uniform_single(float min, float max) {
@@ -94,6 +105,13 @@ float exponential_single(float lambda) {
 	return -(log(drand48()) / lambda);
 }
 
+/**
+ * Generates a single random float according to the Bernoulli distribution.
+*/
+float bernoulli_single(float p) {
+	return drand48() < p ? 1 : 0;
+}
+	
 /**
  * Seeds the random number generator.
 */

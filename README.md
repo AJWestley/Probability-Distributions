@@ -10,8 +10,8 @@ A C library for generating Random Variables according to a few common probabilit
 - Uniform
 - Normal/Gaussian
 - Exponential
+- Bernoulli
 
 ### Distributions to be added
 - Poisson
 - Binomial
-- Bernoulli
