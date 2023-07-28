@@ -9,9 +9,9 @@ A C library for generating Random Variables according to a few common probabilit
 ### Supported Distributions
 - Uniform
 - Normal/Gaussian
+- Exponential
 
 ### Distributions to be added
 - Poisson
 - Binomial
 - Bernoulli
-- Exponential
