@@ -42,20 +42,20 @@ float* uniform_dist(int count, float min, float max) {
 /**
  * Generates an array of random floats according to the Normal/Gaussian distribution.
 */
-float* gaussian_dist(int count, float mu, float sig_squared) {
+float* gaussian_dist(int count, float mu, float sigma) {
 	float* g = malloc(sizeof(float) * count);
 	int i;
 	float rayleigh, theta;
 	for (i = 0; i < count-1; i += 2) {
 		rayleigh = sqrt(-2 * log(drand48()));
 		theta = uniform_single(0, 2 * M_PI);
-		g[i] = sig_squared * rayleigh * cos(theta) + mu;
-		g[i+1] = sig_squared * rayleigh * sin(theta) + mu;
+		g[i] = sigma * rayleigh * cos(theta) + mu;
+		g[i+1] = sigma * rayleigh * sin(theta) + mu;
 	}
 	rayleigh = sqrt(-2 * log(drand48()));
 	theta = uniform_single(0, 2 * M_PI);
-	g[count-1]  = sig_squared * rayleigh * cos(theta) + mu;
-	if (i == count ) g[count-2] = sig_squared * rayleigh * sin(theta) + mu;
+	g[count-1]  = sigma * rayleigh * cos(theta) + mu;
+	if (i == count ) g[count-2] = sigma * rayleigh * sin(theta) + mu;
 		
 	return g;
 }
@@ -92,10 +92,10 @@ float uniform_single(float min, float max) {
 /**
  * Generates a single random float according to the Normal/Gaussian distribution.
 */
-float gaussian_single(float mu, float sig_squared) {
+float gaussian_single(float mu, float sigma) {
 	float rayleigh = sqrt(-2 * log(drand48()));
 	float theta = uniform_single(0, 2 * M_PI);
-	return sig_squared * rayleigh * sin(theta) + mu;
+	return sigma * rayleigh * sin(theta) + mu;
 }
 
 /**
