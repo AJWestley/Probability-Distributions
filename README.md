@@ -11,7 +11,7 @@ A C library for generating Random Variables according to a few common probabilit
 - Normal/Gaussian
 - Exponential
 - Bernoulli
+- Poisson
 
 ### Distributions to be added
-- Poisson
 - Binomial

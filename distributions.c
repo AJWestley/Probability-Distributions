@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
 #include "distributions.h"
 
 int main(int argc, char *argv[]) {
@@ -16,7 +15,7 @@ int main(int argc, char *argv[]) {
 	FILE *fp = fopen("data.txt", "w");
 	int count = atoi(argv[1]);
 
-	float* vars = bernoulli_dist(count, atof(argv[2]));
+	int* vars = bernoulli_dist(count, atof(argv[2]));
 
 	for (int i = 0; i < count; i++) {
 		fprintf(fp, "%f ", vars[i]);
@@ -74,12 +73,23 @@ float* exponential_dist(int count, float lambda) {
 /**
  * Generates an array of random floats according to the Bernoulli distribution.
 */
-float* bernoulli_dist(int count, float p) {
+int* bernoulli_dist(int count, float p) {
 	float* bern = malloc(sizeof(float) * count);
 	for (int i = 0; i < count; i++) {
 		bern[i] = bernoulli_single(p);
 	}
 	return bern;
+}
+
+/**
+ * Generates an array of random integers according to the Poisson distribution.
+*/
+int* poisson_dist(int count, float lambda) {
+	int* poisson = malloc(sizeof(float) * count);
+	for (int i = 0; i < count; i++) {
+		poisson[i] = poisson_single(lambda);
+	}
+	return poisson;
 }
 
 /**
@@ -108,10 +118,32 @@ float exponential_single(float lambda) {
 /**
  * Generates a single random float according to the Bernoulli distribution.
 */
-float bernoulli_single(float p) {
+int bernoulli_single(float p) {
 	return drand48() < p ? 1 : 0;
 }
-	
+
+/**
+ * Generates a single random integer according to the Poisson distribution.
+*/
+int poisson_single(float lambda) {
+	double exp_lambda = exp(-lambda);
+	double uniform;
+	double uniform_product;
+	int poisson;
+
+	poisson = -1;
+	uniform_product = 1;
+
+	do
+	{
+	uniform = uniform_single(0, 1);
+	uniform_product = uniform_product * uniform;
+	poisson++; 
+	} while (uniform_product > exp_lambda);
+
+	return poisson;
+}
+
 /**
  * Seeds the random number generator.
 */
