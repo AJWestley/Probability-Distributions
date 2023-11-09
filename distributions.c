@@ -31,8 +31,9 @@ int main(int argc, char *argv[]) {
  * Generates an array of random floats according to the Uniform distribution.
 */
 float* uniform_dist(int count, float min, float max) {
-	float* u = malloc(sizeof(float) * count);
-	for (int i = 0; i < count; i++) {
+	float* u = malloc(sizeof(float) * (count + 1));
+	u[0] = (float) count;
+	for (int i = 1; i <= count; i++) {
 		u[i] = uniform_single(min, max);
 	}
 	return u;
@@ -42,10 +43,11 @@ float* uniform_dist(int count, float min, float max) {
  * Generates an array of random floats according to the Normal/Gaussian distribution.
 */
 float* gaussian_dist(int count, float mu, float sigma) {
-	float* g = malloc(sizeof(float) * count);
+	float* g = malloc(sizeof(float) * (count + 1));
 	int i;
 	float rayleigh, theta;
-	for (i = 0; i < count-1; i += 2) {
+	g[0] = (float) count;
+	for (i = 1; i <= count-1; i += 2) {
 		rayleigh = sqrt(-2 * log(drand48()));
 		theta = uniform_single(0, 2 * M_PI);
 		g[i] = sigma * rayleigh * cos(theta) + mu;
@@ -53,8 +55,8 @@ float* gaussian_dist(int count, float mu, float sigma) {
 	}
 	rayleigh = sqrt(-2 * log(drand48()));
 	theta = uniform_single(0, 2 * M_PI);
-	g[count-1]  = sigma * rayleigh * cos(theta) + mu;
-	if (i == count ) g[count-2] = sigma * rayleigh * sin(theta) + mu;
+	g[count] = sigma * rayleigh * cos(theta) + mu;
+	if (i == count+1 ) g[count-1] = sigma * rayleigh * sin(theta) + mu;
 		
 	return g;
 }
@@ -63,8 +65,9 @@ float* gaussian_dist(int count, float mu, float sigma) {
  * Generates an array of random floats according to the Exponential distribution.
 */
 float* exponential_dist(int count, float lambda) {
-	float* ex = malloc(sizeof(float) * count);
-	for (int i = 0; i < count; i++) {
+	float* ex = malloc(sizeof(float) * (count + 1));
+	ex[0] = (float) count;
+	for (int i = 1; i <= count; i++) {
 		ex[i] = exponential_single(lambda);
 	}
 	return ex;
@@ -74,8 +77,9 @@ float* exponential_dist(int count, float lambda) {
  * Generates an array of random floats according to the Bernoulli distribution.
 */
 int* bernoulli_dist(int count, float p) {
-	int* bern = malloc(sizeof(float) * count);
-	for (int i = 0; i < count; i++) {
+	int* bern = malloc(sizeof(float) * (count + 1));
+	bern[0] = count;
+	for (int i = 1; i <= count; i++) {
 		bern[i] = bernoulli_single(p);
 	}
 	return bern;
@@ -85,8 +89,9 @@ int* bernoulli_dist(int count, float p) {
  * Generates an array of random integers according to the Poisson distribution.
 */
 int* poisson_dist(int count, float lambda) {
-	int* poisson = malloc(sizeof(float) * count);
-	for (int i = 0; i < count; i++) {
+	int* poisson = malloc(sizeof(float) * (count + 1));
+	poisson[0] = count;
+	for (int i = 1; i <= count; i++) {
 		poisson[i] = poisson_single(lambda);
 	}
 	return poisson;
