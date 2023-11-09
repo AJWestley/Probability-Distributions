@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from PythonWrapper import distributions
+import distributions
 
 class TestGPyT(unittest.TestCase):
     def test_uniform_dist(self):
