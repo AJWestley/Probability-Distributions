@@ -11,9 +11,7 @@ jobs:
       uses : actions/checkout@v2
 
     - name : Build module 
-      run : |
-            cd PythonWrapper \
-            sh build.sh
+      run : sh build.sh
     
     - name : Install dependencies
       run : pip install numpy
