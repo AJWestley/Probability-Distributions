@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	int* vars = bernoulli_dist(count, atof(argv[2]));
 
 	for (int i = 0; i < count; i++) {
-		fprintf(fp, "%f ", vars[i]);
+		fprintf(fp, "%d ", vars[i]);
 	}
 
 	fclose(fp);
@@ -74,7 +74,7 @@ float* exponential_dist(int count, float lambda) {
  * Generates an array of random floats according to the Bernoulli distribution.
 */
 int* bernoulli_dist(int count, float p) {
-	float* bern = malloc(sizeof(float) * count);
+	int* bern = malloc(sizeof(float) * count);
 	for (int i = 0; i < count; i++) {
 		bern[i] = bernoulli_single(p);
 	}
