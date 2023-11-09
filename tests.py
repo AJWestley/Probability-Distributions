@@ -21,8 +21,18 @@ class TestGPyT(unittest.TestCase):
         dist_mu = 0
         dist_sig = 5
         a = distributions.gaussian_dist(dist_length, dist_mu, dist_sig)
+        self.assertEqual(len(a), dist_length, "gaussian_dist: length incorrect.")
         self.assertAlmostEqual(np.mean(a), dist_mu, 1, "gaussian_dist: generated distribution did not have the expected mean.")
         self.assertAlmostEqual(np.std(a), dist_sig, 1, "gaussian_dist: generated distribution did not have the expected standard deviation.")
+    
+    def test_exponential_dist(self):
+        dist_length = 100000
+        dist_lambda = 0.2
+        a = distributions.exponential_dist(dist_length, dist_lambda)
+        self.assertEqual(len(a), dist_length, "exponential_dist: length incorrect.")
+        b = np.random.exponential(dist_lambda, dist_length)
+        self.assertAlmostEqual(np.mean(a), np.mean(b), 1, "exponential_dist: generated distribution did not have the expected mean.")
+        self.assertAlmostEqual(np.std(a), np.std(b), 1, "exponential_dist: generated distribution did not have the expected standard deviation.")
 
 
 if __name__ == '__main__':
