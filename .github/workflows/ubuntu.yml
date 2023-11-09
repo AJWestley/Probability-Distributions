@@ -9,9 +9,12 @@ jobs:
     steps:
     - name : Checkout code
       uses : actions/checkout@v2
+    
+    - name : Open directory
+      run : cd PythonWrapper
       
-    - name : Build Module 
-      run : sh PythonWrapper/build.sh
+    - name : Build module 
+      run : sh build.sh
       
     - name : Run tests 
       run : python3 -m unittest -v
