@@ -33,6 +33,26 @@ class TestGPyT(unittest.TestCase):
         b = np.random.exponential(dist_lambda, dist_length)
         self.assertAlmostEqual(np.mean(a), np.mean(b), 1, "exponential_dist: generated distribution did not have the expected mean.")
         self.assertAlmostEqual(np.std(a), np.std(b), 1, "exponential_dist: generated distribution did not have the expected standard deviation.")
+    
+    def test_bernoulli(self):
+        dist_length = 100000
+        dist_p = 0.5
+        a = distributions.bernoulli_dist(dist_length, dist_p)
+        self.assertEqual(len(a), dist_length, "bernoulli_dist: length incorrect.")
+        self.assertAlmostEqual(np.mean(a), dist_p, 1, "bernoulli_dist: generated distribution did not have the expected mean.")
+        dist_p = 0.2
+        a = distributions.bernoulli_dist(dist_length, dist_p)
+        self.assertAlmostEqual(np.mean(a), dist_p, 1, "bernoulli_dist: generated distribution did not have the expected mean.")
+    
+    def test_poisson(self):
+        dist_length = 100000
+        dist_p = 0.7
+        a = distributions.poisson_dist(dist_length, dist_p)
+        self.assertEqual(len(a), dist_length, "poisson_dist: length incorrect.")
+        self.assertAlmostEqual(np.mean(a), dist_p, 1, "poisson_dist: generated distribution did not have the expected mean.")
+        dist_p = 2.9
+        a = distributions.poisson_dist(dist_length, dist_p)
+        self.assertAlmostEqual(np.mean(a), dist_p, 1, "poisson_dist: generated distribution did not have the expected mean.")
 
 
 if __name__ == '__main__':
