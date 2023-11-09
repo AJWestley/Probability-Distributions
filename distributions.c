@@ -117,7 +117,7 @@ float gaussian_single(float mu, float sigma) {
  * Generates a single random float according to the Exponential distribution.
 */
 float exponential_single(float lambda) {
-	return -(log(drand48()) / lambda);
+	return -(log(drand48()) / (1 / lambda));
 }
 
 /**
