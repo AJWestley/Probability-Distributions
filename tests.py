@@ -22,7 +22,7 @@ class TestGPyT(unittest.TestCase):
         dist_sig = 5
         a = distributions.gaussian_dist(dist_length, dist_mu, dist_sig)
         self.assertAlmostEqual(np.mean(a), dist_mu, 1, "gaussian_dist: generated distribution did not have the expected mean.")
-        self.assertAlmostEqual(np.std(a), dist_mu, 1, "gaussian_dist: generated distribution did not have the expected standard deviation.")
+        self.assertAlmostEqual(np.std(a), dist_sig, 1, "gaussian_dist: generated distribution did not have the expected standard deviation.")
 
 
 if __name__ == '__main__':
