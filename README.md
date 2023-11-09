@@ -1,5 +1,6 @@
 # Probability Distributions
-A C library for generating Random Variables according to a few common probability distributions.
+A C library for generating Random Variables according to a few common probability distributions. </br>
+Also has a wrapper to be used with python.
 
 ### Usage Notes
 
