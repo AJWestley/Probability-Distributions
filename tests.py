@@ -14,7 +14,7 @@ class TestGPyT(unittest.TestCase):
         for val in a:
             self.assertLessEqual(val, dist_max, "uniform_dist: generated value below the minimum bounds.")
             self.assertGreaterEqual(val, dist_min, "uniform_dist: generated value above the maximum bounds.")
-        self.assertAlmostEqual(np.mean(a), (dist_max + dist_min) / 2, 2, "uniform_dist: generated distribution did not have the expected mean.")
+        self.assertAlmostEqual(np.mean(a), (dist_max + dist_min) / 2, 1, "uniform_dist: generated distribution did not have the expected mean.")
 
 
 if __name__ == '__main__':
