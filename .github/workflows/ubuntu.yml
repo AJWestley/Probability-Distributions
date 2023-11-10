@@ -9,12 +9,10 @@ jobs:
     steps:
     - name : Checkout code
       uses : actions/checkout@v2
-
-    - name : Build module 
-      run : sh build.sh
     
     - name : Install dependencies
       run : pip install numpy
-      
+    
     - name : Run tests 
-      run : python3 -m unittest -v
+      working-directory : ./testing
+      run : sh run_tests.sh
