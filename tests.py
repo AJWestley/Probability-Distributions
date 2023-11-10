@@ -52,7 +52,7 @@ class TestGPyT(unittest.TestCase):
         self.assertEqual(len(a), dist_length, "binomial_dist: length incorrect.")
         b = np.random.binomial(dist_n, dist_p, dist_length)
         self.assertAlmostEqual(np.mean(a), np.mean(b), 1, "binomial_dist: generated distribution did not have the expected mean.")
-        dist_p = 2.9
+        dist_p = 0.2
         a = distributions.binomial_dist(dist_length, dist_p, dist_n)
         b = np.random.binomial(dist_n, dist_p, dist_length)
         self.assertAlmostEqual(np.mean(a), np.mean(b), 1, "binomial_dist: generated distribution did not have the expected mean.")
