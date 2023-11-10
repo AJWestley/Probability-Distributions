@@ -18,3 +18,10 @@ Also has a wrapper to be used with Python.
 - Bernoulli
 - Binomial
 - Poisson
+
+### Distributions to come
+- Gamma
+- Logistic
+- Cauchy
+- Weibull
+- Hypergeometric
