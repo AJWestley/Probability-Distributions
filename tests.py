@@ -44,6 +44,20 @@ class TestGPyT(unittest.TestCase):
         a = distributions.bernoulli_dist(dist_length, dist_p)
         self.assertAlmostEqual(np.mean(a), dist_p, 1, "bernoulli_dist: generated distribution did not have the expected mean.")
     
+    def test_binomial(self):
+        dist_length = 100000
+        dist_p = 0.7
+        dist_n = 50
+        a = distributions.binomial_dist(dist_length, dist_p, dist_n)
+        self.assertEqual(len(a), dist_length, "binomial_dist: length incorrect.")
+        b = np.random.binomial(dist_n, dist_p, dist_length)
+        self.assertAlmostEqual(np.mean(a), np.mean(b), 1, "binomial_dist: generated distribution did not have the expected mean.")
+        dist_p = 2.9
+        a = distributions.binomial_dist(dist_length, dist_p, dist_n)
+        b = np.random.binomial(dist_n, dist_p, dist_length)
+        self.assertAlmostEqual(np.mean(a), np.mean(b), 1, "binomial_dist: generated distribution did not have the expected mean.")
+        self.assertAlmostEqual(np.std(a), np.std(b), 1, "binomial_dist: generated distribution did not have the expected standard deviation.")
+    
     def test_poisson(self):
         dist_length = 100000
         dist_p = 0.7

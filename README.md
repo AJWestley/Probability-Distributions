@@ -16,7 +16,5 @@ Also has a wrapper to be used with Python.
 - Normal/Gaussian
 - Exponential
 - Bernoulli
-- Poisson
-
-### Distributions to be added
 - Binomial
+- Poisson
