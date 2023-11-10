@@ -86,6 +86,18 @@ int* bernoulli_dist(int count, float p) {
 }
 
 /**
+ * Generates an array of random floats according to the Binomial distribution.
+*/
+int* binomial_dist(int count, float p, int n) {
+	int* bino = malloc(sizeof(float) * (count + 1));
+	bino[0] = count;
+	for (int i = 1; i <= count; i++) {
+		bino[i] = binomial_single(p, n);
+	}
+	return bino;
+}
+
+/**
  * Generates an array of random integers according to the Poisson distribution.
 */
 int* poisson_dist(int count, float lambda) {
@@ -125,6 +137,17 @@ float exponential_single(float lambda) {
 */
 int bernoulli_single(float p) {
 	return drand48() < p ? 1 : 0;
+}
+
+/**
+ * Generates a single random float according to the Binomial distribution.
+*/
+int binomial_single(float p, int n) {
+	int bino = 0;
+	for (int i = 0; i < n; i++) {
+		bino += (drand48() < p ? 1 : 0);
+	}
+	return bino;
 }
 
 /**

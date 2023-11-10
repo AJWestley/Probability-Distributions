@@ -5,3 +5,4 @@ distributions_wrap.c
 *.o
 *.so
 distributions.py
+benchmark.py
