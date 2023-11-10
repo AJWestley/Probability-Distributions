@@ -3,7 +3,7 @@
 # Build Python wrapper
 cd ../PythonWrapper
 sh build.sh
-cd ../testing
 
 # Run tests
+cd ..
 python3 -m unittest -v
